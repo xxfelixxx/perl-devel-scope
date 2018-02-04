@@ -14,5 +14,6 @@ inc/
 nytprof.out
 pod2htm*.tmp
 pm_to_blib
-Devel-Debug-Scope-*
-Devel-Debug-Scope-*.tar.gz
+Devel-Scope-*
+Devel-Scope-*.tar.gz
+*~
