@@ -39,4 +39,4 @@ Perl library providing a debug function that prints based on the scoping level.
 
     ...
 
-    DEVEL_SCOPE=3 perl foo.pl
+    DEVEL_SCOPE_DEPTH=3 perl foo.pl
