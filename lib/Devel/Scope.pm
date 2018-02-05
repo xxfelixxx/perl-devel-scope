@@ -119,7 +119,7 @@ __END__
 
 =head1 NAME
 
-Devel::Scope
+Devel::Scope - Scope based debug
 
 =head1 VERSION
 
