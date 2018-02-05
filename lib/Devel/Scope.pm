@@ -55,7 +55,7 @@ debug("Using " . __PACKAGE__ . ' with ');
 for my $key (sort keys %config) {
     debug("    " . $key . '=' . $config{$key});
 }
-
+debug("-"x40);
 
 sub debug {
     return if not defined $ENV{'DEVEL_SCOPE_DEPTH'};
