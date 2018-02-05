@@ -1,5 +1,8 @@
 Revision history for Devel-Scope
 
+0.03    Mon Feb  5 01:23:25 UTC 2018
+        * Added prereqs to Makefile.PL
+
 0.02    Sun Feb  4 11:44:39 UTC 2018
         * Fixed Documentation
 

@@ -7,9 +7,13 @@ Name
 -----
 Devel::Scope
 
+[![Build Status](https://secure.travis-ci.org/xxfelixxx/perl-term-colormap.svg)](http://travis-ci.org/xxfelixxx/perl-devel-scope)
+[![Coverage Status](https://coveralls.io/repos/github/xxfelixxx/perl-devel-scope/badge.svg?branch=master)](https://coveralls.io/github/xxfelixxx/perl-devel-scope?branch=master)
+[![CPAN version](https://badge.fury.io/pl/Devel-Scope.svg)](https://badge.fury.io/pl/Devel-Scope)
+
 Version
 ---------
-Version 0.02
+Version 0.03
 
 Synopsis
 -----------
