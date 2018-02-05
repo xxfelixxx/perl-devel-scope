@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Capture::Tiny ':all';
-use File::Temp;
+use FindBin qw($Bin);
 use Test::More;
 
 use Devel::Scope qw( debug );
@@ -13,7 +13,7 @@ debug("ERROR! Testing Devel::Scope::debug from main");
 $ENV{'DEVEL_SCOPE_DEPTH'} = 1;
 debug("OK! Testing Devel::Scope::debug from main");
 
-my $fixture = 'devel-scope.fixture';
+my $fixture = "$Bin/devel-scope.fixture";
 ok(-f $fixture, "Fixture $fixture exists");
 my ($bad_env) = capture_merged {
     system("DEVEL_SCOPE_DEBUG=3 perl $fixture");
