@@ -164,7 +164,7 @@ Provide a debug method that outputs conditionally based on the scoping level.
 =head2 debug
 
     Prints only when the scope is greater (deeper) than some number.
-    Turns into a NO-OP unless DEVEL_SCOPE environmental variable is set.
+    Turns into a NO-OP unless DEVEL_SCOPE_DEPTH environmental variable is set.
 
 =cut
 
