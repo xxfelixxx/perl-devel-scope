@@ -13,7 +13,7 @@ require Exporter;
 our @ISA       = qw( Exporter );
 our @EXPORT_OK = qw( debug );
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 my $env_prefix = 'DEVEL_SCOPE_';
 my @env_vars_maybe = grep { m|^$env_prefix| } keys %ENV;
@@ -123,7 +123,7 @@ Devel::Scope - Scope based debug
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =head1 SYNOPSIS
 
