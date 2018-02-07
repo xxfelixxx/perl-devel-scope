@@ -1,5 +1,8 @@
 Revision history for Devel-Scope
 
+0.06    Wed Feb  7 01:33:41 UTC 2018
+        * Refactored tests to be more portable.
+
 0.05    Tue Feb  6 09:25:03 UTC 2018
         * Fixed Pod.
 
