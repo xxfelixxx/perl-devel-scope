@@ -45,7 +45,7 @@ debug("-"x40);
 
 sub debug {
     return if not defined $ENV{'DEVEL_SCOPE_DEPTH'};
-
+    $config{'DEVEL_SCOPE_DEPTH'} = $ENV{'DEVEL_SCOPE_DEPTH'};
     my $toc = [ gettimeofday ];
 
     my ($message) = join(' ', @_);

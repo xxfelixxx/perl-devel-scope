@@ -9,9 +9,12 @@ use Test::More;
 
 use Devel::Scope qw( debug );
 
+pass("Testing debug from main");
 debug("ERROR! Testing Devel::Scope::debug from main");
 $ENV{'DEVEL_SCOPE_DEPTH'} = 1;
 debug("OK! Testing Devel::Scope::debug from main");
+
+test_from_subroutine();
 
 my $fixture = "$Bin/devel-scope.fixture";
 ok(-f $fixture, "Fixture $fixture exists");
@@ -61,4 +64,15 @@ sub run_fixture {
     };
     return $output;
 }
+
+sub test_from_subroutine {
+    note("Testing debug from subroutine");
+    note("Unsetting DEVEL_SCOPE_DEPTH - Should be no debug message right after this line.");
+    delete $ENV{'DEVEL_SCOPE_DEPTH'};
+    debug("ERROR! Testing Devel::Scope::debug from subroutine");
+    note("Setting DEVEL_SCOPE_DEPTH=1");
+    $ENV{'DEVEL_SCOPE_DEPTH'} = 1;
+    debug("OK! Testing Devel::Scope::debug from subroutine");
+}
+
 1;
