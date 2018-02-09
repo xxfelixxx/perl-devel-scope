@@ -11,7 +11,7 @@ use Time::HiRes qw( tv_interval gettimeofday );
 
 require Exporter;
 our @ISA       = qw( Exporter );
-our @EXPORT_OK = qw( debug );
+our @EXPORT_OK = qw( debug debug_enable debug_disable );
 
 our $VERSION = '0.06';
 
@@ -99,6 +99,23 @@ sub output {
     }
 }
 
+sub debug_disable {
+    my $previous_value = $ENV{'DEVEL_SCOPE_DEPTH'};
+    delete $ENV{'DEVEL_SCOPE_DEPTH'};
+    delete $config{'DEVEL_SCOPE_DEPTH'};
+    return $previous_value;
+}
+
+sub debug_enable {
+    my ($depth) = @_;
+    $depth ||= $default_config{'DEVEL_SCOPE_DEPTH'};
+
+    $ENV{'DEVEL_SCOPE_DEPTH'} = $depth;
+    $config{'DEVEL_SCOPE_DEPTH'} = $depth;
+
+    return $depth;
+}
+
 sub validate_env_vars {
     my $env_prefix = 'DEVEL_SCOPE_';
     my @env_vars_maybe = grep { m|^$env_prefix| } keys %ENV;
@@ -165,6 +182,8 @@ Provide a debug method that outputs conditionally based on the scoping level.
 =head1 EXPORT
 
     debug
+    debug_enable
+    debug_disable
 
 =head1 SUBROUTINES/METHODS
 
@@ -172,6 +191,24 @@ Provide a debug method that outputs conditionally based on the scoping level.
 
     Prints only when the scope is greater (deeper) than some number.
     Turns into a NO-OP unless DEVEL_SCOPE_DEPTH environmental variable is set.
+
+        debug("The value of foo = 2")
+
+head2 debug_enable
+
+    Turn on debugging
+
+        debug_enable(2); # Set the depth to 2
+
+        my $current_debug_depth = debug_enable();
+
+head3 debug disable
+
+    Turn off debugging
+
+        debug_disable();
+
+        my $previous_debug_depth = debug_disable();
 
 =cut
 

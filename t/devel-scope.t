@@ -7,11 +7,19 @@ use Capture::Tiny ':all';
 use FindBin qw($Bin);
 use Test::More;
 
-use Devel::Scope qw( debug );
+use Devel::Scope qw( debug debug_disable debug_enable );
 
-pass("Testing debug from main");
+note("Testing debug from main via DEVEL_SCOPE_DEPTH environmental variable");
 debug("ERROR! Testing Devel::Scope::debug from main");
 $ENV{'DEVEL_SCOPE_DEPTH'} = 1;
+debug("OK! Testing Devel::Scope::debug from main");
+
+note("Testing debug from main via debug_disable and debug_enable methods");
+note("Running debug_disable - there should be no debug line after this line.");
+debug_disable();
+debug("ERROR! Testing Devel::Scope::debug from main");
+note("Running debug_enable(1)");
+debug_enable(1);
 debug("OK! Testing Devel::Scope::debug from main");
 
 test_from_subroutine();
@@ -67,7 +75,7 @@ sub run_fixture {
 
 sub test_from_subroutine {
     note("Testing debug from subroutine");
-    note("Unsetting DEVEL_SCOPE_DEPTH - Should be no debug message right after this line.");
+    note("Unsetting DEVEL_SCOPE_DEPTH - there should be no debug message right after this line.");
     delete $ENV{'DEVEL_SCOPE_DEPTH'};
     debug("ERROR! Testing Devel::Scope::debug from subroutine");
     note("Setting DEVEL_SCOPE_DEPTH=1");
