@@ -15,10 +15,7 @@ our @EXPORT_OK = qw( debug );
 
 our $VERSION = '0.06';
 
-my $env_prefix = 'DEVEL_SCOPE_';
-my @env_vars_maybe = grep { m|^$env_prefix| } keys %ENV;
-
-my %config = (
+my %default_config = (
     'DEVEL_SCOPE_DEPTH'                => 0,
     'DEVEL_SCOPE_MIN_DECIMAL_PLACES'   => 10,
     'DEVEL_SCOPE_TIME_FORMAT'          => '%06f',
@@ -26,18 +23,7 @@ my %config = (
     'DEVEL_SCOPE_TIME_LOG_OFFSET'      => 4,
 );
 
-for my $env_var (@env_vars_maybe) {
-    if ( not defined $config{$env_var} ) {
-        print "Invalid " . __PACKAGE__ . " env variable '$env_var'\n";
-        print "Possible variable names: [name=default]\n";
-        for my $key ( sort keys %config ) {
-            print "    " . $key . '=' . $config{$key} . "\n";
-        }
-        die "\n";
-    } else {
-        $config{ $env_var } = $ENV{ $env_var };
-    }
-}
+my %config = validate_env_vars();
 
 my $time_format = $config{'DEVEL_SCOPE_TIME_FORMAT'};
 my $format_total_and_elapsed = "[ $time_format : $time_format ]";
@@ -111,6 +97,27 @@ sub output {
         local $| = 1;
         print $msg;
     }
+}
+
+sub validate_env_vars {
+    my $env_prefix = 'DEVEL_SCOPE_';
+    my @env_vars_maybe = grep { m|^$env_prefix| } keys %ENV;
+
+    my %config = %default_config;
+    for my $env_var (@env_vars_maybe) {
+        if ( not defined $config{$env_var} ) {
+            print "Invalid " . __PACKAGE__ . " env variable '$env_var'\n";
+            print "Possible variable names: [name=default]\n";
+            for my $key ( sort keys %config ) {
+                print "    " . $key . '=' . $config{$key} . "\n";
+            }
+            die "\n";
+        } else {
+            $config{ $env_var } = $ENV{ $env_var };
+        }
+    }
+
+    return %config;
 }
 
 1; # End of Devel::Scope
