@@ -13,7 +13,7 @@ Devel::Scope
 
 Version
 ---------
-Version 0.06
+Version 0.08
 
 Synopsis
 -----------
