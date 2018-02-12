@@ -7,7 +7,36 @@ use Capture::Tiny ':all';
 use FindBin qw($Bin);
 use Test::More;
 
-use Devel::Scope qw( debug debug_disable debug_enable );
+BEGIN {
+    local $ENV{DEVEL_SCOPE_DEBUG} = 3;
+
+    eval 'require Devel::Scope;';
+    my $begin_bad_env = $@;
+    if (defined $begin_bad_env) {
+        pass("Caught invalid environmental variable.");
+        note("Message: $begin_bad_env");
+    } else {
+        fail("Should have caught invalid environmental variable.");
+    }
+
+    note("Removing Devel/Scope.pm from \%INC so we can reload.");
+    delete $INC{'Devel/Scope.pm'};
+
+    note("Removing invalid key DEVEL_SCOPE_DEBUG from \%ENV.");
+    delete $ENV{DEVEL_SCOPE_DEBUG};
+
+    note("Turning off warnings");
+    $SIG{__WARN__} = sub { my $warn = shift; return; };
+
+    eval 'use Devel::Scope qw( debug debug_enable debug_disable )';
+    BAIL_OUT($@) if $@;
+    pass("Reloaded Devel::Scope");
+
+    note("Turning on warnings");
+    $SIG{__WARN__} = sub { my $warn = shift; warn $warn; };
+
+    pass("End of BEGIN tests");
+};
 
 note("Testing debug from main via DEVEL_SCOPE_DEPTH environmental variable");
 debug("ERROR! Testing Devel::Scope::debug from main");
@@ -34,15 +63,10 @@ ok($bad_env =~ m|Invalid Devel::Scope env variable|s, "Caught invalid environmen
     or diag("Got: $bad_env");
 
 eval {
-    local $ENV{DEVEL_SCOPE_DEBUG} = 3;
-    debug("ERROR! Should not work!");
+    debug("OK! Debugging from within an eval");
+    sleep 1;
+    debug("OK! Debugging from within an eval [ slow statement - notice the stars! ]");
 };
-my $bad_env2 = $@;
-if (defined $bad_env2) {
-    pass("Caught invalid environmental variable.");
-} else {
-    fail("Should have caught invalid environmental variable.");
-}
 
 my $level0 = run_fixture(0);
 match_all( $level0, qw(
