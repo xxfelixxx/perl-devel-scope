@@ -1,5 +1,8 @@
 Revision history for Devel-Scope
 
+0.09    Mon Feb 12 04:33:41 UTC 2018
+        * Added invalid environmental variable test.
+
 0.08    Mon Feb 12 04:04:47 UTC 2018
         * Refactored tests, ensure multi-line match.
 
