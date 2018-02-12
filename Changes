@@ -1,5 +1,8 @@
 Revision history for Devel-Scope
 
+0.10    Mon Feb 12 05:14:19 UTC 2018
+        * Moved invalid environmental variable test to BEGIN block.
+
 0.09    Mon Feb 12 04:33:41 UTC 2018
         * Added invalid environmental variable test.
 
