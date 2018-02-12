@@ -33,6 +33,17 @@ my ($bad_env) = do {
 ok($bad_env =~ m|Invalid Devel::Scope env variable|s, "Caught invalid environmental variable")
     or diag("Got: $bad_env");
 
+eval {
+    local $ENV{DEVEL_SCOPE_DEBUG} = 3;
+    debug("ERROR! Should not work!");
+};
+my $bad_env2 = $@;
+if (defined $bad_env2) {
+    pass("Caught invalid environmental variable.");
+} else {
+    fail("Should have caught invalid environmental variable.");
+}
+
 my $level0 = run_fixture(0);
 match_all( $level0, qw(
            0:Main-Block
