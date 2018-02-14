@@ -13,7 +13,7 @@ require Exporter;
 our @ISA       = qw( Exporter );
 our @EXPORT_OK = qw( debug debug_enable debug_disable );
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 my %default_config = (
     'DEVEL_SCOPE_DEPTH'                => 0,
@@ -173,7 +173,7 @@ Devel::Scope - Scope based debug
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,8 @@
 Revision history for Devel-Scope
 
+0.11    Wed Feb 14 05:34:51 UTC 2018
+        * Only print filenames as they change
+
 0.10    Mon Feb 12 05:14:19 UTC 2018
         * Moved invalid environmental variable test to BEGIN block.
 
