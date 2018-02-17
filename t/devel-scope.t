@@ -102,6 +102,11 @@ match_none($level3, qw(
 my $level5 = run_fixture(5);
 pass("All output:\n$level5");
 
+unless( Test::More->builder->is_passing ) {
+    note("Adding all output to a fail() block so it shows up in Test Report.");
+    fail("All output:\n$level5");
+}
+
 done_testing();
 
 sub _match {
