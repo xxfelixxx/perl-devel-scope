@@ -1,5 +1,9 @@
 Revision history for Devel-Scope
 
+0.12    Sat Feb 17 08:58:42 UTC 2018
+        * Add more verbose output if tests are failing
+        * Some variants of FreeBSD are failing some tests...
+
 0.11    Wed Feb 14 05:34:51 UTC 2018
         * Only print filenames as they change
 
