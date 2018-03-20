@@ -220,7 +220,7 @@ Provide a debug method that outputs conditionally based on the scoping level.
 
         debug("The value of foo = 2")
 
-head2 debug_enable
+=head2 debug_enable
 
     Turn on debugging
 
@@ -228,7 +228,7 @@ head2 debug_enable
 
         my $current_debug_depth = debug_enable();
 
-head3 debug disable
+=head3 debug disable
 
     Turn off debugging
 
